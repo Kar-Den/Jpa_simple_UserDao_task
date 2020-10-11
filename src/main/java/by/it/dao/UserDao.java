@@ -37,7 +37,11 @@ public class UserDao {
     }
 
 
-    public void deleteById() {
+    public void deleteById(long id) {
+        EntityManager em = JpaEntityManagerFactoryUtil.getEntityManager();
+        em.getTransaction().begin();
+        em.remove(findByID(id));
+        em.getTransaction().commit();
 
     }
 }
