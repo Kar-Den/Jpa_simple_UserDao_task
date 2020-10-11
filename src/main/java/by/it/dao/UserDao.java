@@ -4,6 +4,7 @@ import by.it.JpaEntityManagerFactoryUtil;
 import by.it.model.User;
 
 import javax.persistence.EntityManager;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDao {
@@ -19,7 +20,12 @@ public class UserDao {
 
 
     public List<User> findAll() {
-        return null;
+        List<User> allUsers = new ArrayList<>();
+        EntityManager em = JpaEntityManagerFactoryUtil.getEntityManager();
+        em.getTransaction().begin();
+        allUsers = em.createQuery("select user from User user").getResultList();
+        em.getTransaction().commit();
+        return allUsers;
     }
 
 
