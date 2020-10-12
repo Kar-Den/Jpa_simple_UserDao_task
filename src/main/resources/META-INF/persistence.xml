@@ -11,7 +11,9 @@
         <properties>
 
             <property name="hibernate.connection.url"
-                      value="jdbc:h2:mem:persistence-example;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=TRUE"/>
+                      value="jdbc:h2:C:\Users\Happy Family\IdeaProjects\Jpa_simple_UserDao_task\src\main\resources\database\test"/>
+<!--                      value="jdbc:h2:mem:persistence-example;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=TRUE"/>-->
+
             <property name="hibernate.connection.driver_class" value="org.h2.Driver"/>
             <property name="hibernate.connection.username" value="root"/>
             <property name="hibernate.connection.password" value="root"/>

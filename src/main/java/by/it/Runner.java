@@ -3,6 +3,7 @@ package by.it;
 import by.it.dao.UserDao;
 import by.it.model.User;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 
@@ -52,16 +53,29 @@ public class Runner {
                 .firstName("Антон")
                 .lastName("Снежков")
                 .email("anton_sniazhkou1@epam.com").build());
-
-
-        User userFindById = userDao.findByID(10L);
-        System.out.println(userFindById.getFirstName() + " " + userFindById.getLastName() + " " + userFindById.getEmail());
+        userDao.create(User.builder()
+                .firstName("Денис")
+                .lastName("Карпенко")
+                .email("k.denis.vlad@gmail.com").build());
 
         List<User> users = userDao.findAll();
-
         for (User user : users) {
-            System.out.println(user.getFirstName() + " " + user.getLastName() + " " + user.getEmail());
+            System.out.println(user.getId() + " " + user.getFirstName() + " " + user.getLastName() + " " + user.getEmail());
         }
+
+        User userIam = userDao.findByID(11);
+        userIam.setFirstName(userIam.getFirstName().toUpperCase());
+        userIam.setLastName(userIam.getLastName().toUpperCase());
+        userIam.setEmail(userIam.getEmail().toUpperCase());
+        userDao.update(userIam);
+
+
+        User userFindById = userDao.findByID(11L);
+        System.out.println(userFindById.getFirstName() + " " + userFindById.getLastName() + " " + userFindById.getEmail());
+
+        userDao.deleteById(1L);
+
+//        System.out.println(userDao.findAll());
 
 
     }
