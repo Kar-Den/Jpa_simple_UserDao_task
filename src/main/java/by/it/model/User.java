@@ -2,15 +2,20 @@ package by.it.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.*;
 
 @Entity
 @AllArgsConstructor
 @Builder
+@EqualsAndHashCode
 @Table(name = "users")
+//@TableGenerator(name = "gena", table = "chebur", pkColumnName = "id", valueColumnName = "id_value", allocationSize = 4)
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "gena")
     private Long id;
     @Column(name = "first_name")
     private String firstName;
@@ -54,5 +59,15 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

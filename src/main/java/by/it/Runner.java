@@ -2,12 +2,26 @@ package by.it;
 
 import by.it.dao.UserDao;
 import by.it.model.User;
+import org.h2.tools.Server;
 
 import javax.persistence.EntityManager;
+import java.sql.SQLException;
 import java.util.List;
 
 
 public class Runner {
+
+    // private final Class<T> clazz = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+
+    private final static Server SERVER;
+
+    static {
+        try {
+            SERVER = Server.createTcpServer().start();
+        } catch (SQLException e) {
+            throw new RuntimeException("error start server " + e);
+        }
+    }
 
     public static void main(String[] args) {
 
@@ -75,10 +89,20 @@ public class Runner {
 
         userDao.deleteById(1L);
 
-//        System.out.println(userDao.findAll());
+        userDao.findAll().forEach(System.out::println);
 
+//        System.out.println(userIam.hashCode());
+//        System.out.println(1607060782);
 
+        userDao.create(User.builder()
+                .firstName("Денис")
+                .lastName("Карпенко")
+                .email("k.denis.vlad@gmail.com").build());
+
+        userDao.findAll().forEach(System.out::println);
     }
+
+
 
 }
 
